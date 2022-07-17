@@ -22,4 +22,4 @@ def ws_algorithm(qubits):
     shift_operator(one_step_circuit)
     one_step_gate = one_step_circuit.to_instruction()
 
-    return one_step_gate
+    return one_step_circuit
