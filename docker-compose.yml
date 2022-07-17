@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+
+    backend_flask:
+        container_name: backend_flask
+        build: .
+        ports:
+            - "8081:8081"
+        volumes:
+            - .:/Quantum_Programming_ASService/
