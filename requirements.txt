@@ -6,3 +6,4 @@ qiskit
 matplotlib
 pylatexenc
 pandas
+pymongo

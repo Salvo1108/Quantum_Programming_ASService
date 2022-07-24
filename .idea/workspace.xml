@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50cb23dd-69cb-44ed-a7dd-2751678b03a0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/gateway/walkSearch.py" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/walkSearch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Quantum_Programming_ASService.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Quantum_Programming_ASService.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +25,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -65,6 +69,11 @@
       <updated>1658054038153</updated>
       <workItem from="1658054041775" duration="10000" />
       <workItem from="1658054056470" duration="154000" />
+      <workItem from="1658093770210" duration="5000" />
+      <workItem from="1658140442063" duration="989000" />
+      <workItem from="1658562925234" duration="687000" />
+      <workItem from="1658565743690" duration="4595000" />
+      <workItem from="1658652478848" duration="6047000" />
     </task>
     <servers />
   </component>
@@ -72,6 +81,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1658054116805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
+    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1658665951681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
   </component>
 </project>
