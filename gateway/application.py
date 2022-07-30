@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, url_for, redirect, render_template
 from deutschJozsa import *
 from bernsteinVazirani import *
 from simons import *
@@ -9,7 +9,6 @@ import pymongo
 from pymongo import MongoClient
 from datetime import datetime
 from bson.binary import Binary
-from flask import  request
 import os
 
 # establish a connection to the database
@@ -29,23 +28,44 @@ mycol = mydb["algorithm"]
 
 @app.route('/', methods=['GET'])
 def index():
+    return render_template('welcomePage.html')
 
-    return "Welcome on board!"
+@app.route('/choise_Algorithms', methods=['GET', 'POST'])
+def choise_Algorithms():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+
+    return render_template('choiseAlgorithms.html')
+
+@app.route('/insert_Algorithms', methods=['GET', 'POST'])
+def insert_Algorithms():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+
+    return render_template('insertAlgorithms.html')
+
+@app.route('/back', methods=['GET', 'POST'])
+def back():
+    return redirect(url_for('index'))
 
 
 @app.route('/quantumAPI', methods=['POST'])
 def quantumAPI():
 
-    switch = request.args.get('type', type=int)
+    switch = request.form.get('type_selected', type=int)
+    print(switch,flush=True)
     if switch == 1:
-        log_size = request.args.get('log_size', type=int)
-        case = request.args.get('case', type=str)
-        oracle_gate = dj_oracle(case, log_size)
-        dj_circuit = dj_algorithm(oracle_gate, log_size)
-        dj_circuit.draw()
-        dj_circuit.qasm(formatted=True, filename="DeutschJozsa.qasm")
+        log_size = request.form.get('log_size', type=int)
+        case = request.form.get('case_selected', type=str)
         # Getting the current date and time
         dt = datetime.now()
+        oracle_gate = dj_oracle(case, log_size)
+        dj_circuit = dj_algorithm(oracle_gate, log_size)
+        cir = dj_circuit.draw(output='mpl')
+        pathImg = './static/DeutschJozsa_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        dj_circuit.qasm(formatted=True, filename="DeutschJozsa.qasm")
+
         with open("DeutschJozsa.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -57,17 +77,20 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("DeutschJozsa.qasm")
+        pathImgNew = pathImg.replace("./static/","")
 
-        return "Algoritmo Deutsch Jozsa OK"
+        return render_template('result.html', message="Deutsch Jozsa algorithm executed correctly", circuit=pathImgNew)
 
     elif switch == 2:
-        num_qubits = request.args.get('num_qubits', type=int)
-        bynary_string = request.args.get('bynary_string', type=str)
-        bV_circuit = bv_algorithm(num_qubits, bynary_string)
-        bV_circuit.draw()
-        bV_circuit.qasm(formatted=True, filename="BernsteinVazirani.qasm")
+        num_qubits = request.form.get('num_qubits', type=int)
+        bynary_string = request.form.get('bynary_string', type=str)
         # Getting the current date and time
         dt = datetime.now()
+        bV_circuit = bv_algorithm(num_qubits, bynary_string)
+        cir = bV_circuit.draw(output='mpl')
+        pathImg = './static/DeutschJozsa_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        bV_circuit.qasm(formatted=True, filename="BernsteinVazirani.qasm")
         with open("BernsteinVazirani.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -79,17 +102,21 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("BernsteinVazirani.qasm")
+        pathImgNew = pathImg.replace("./static/", "")
 
-        return "Algoritmo Bernstein Vazirani OK"
+        return render_template('result.html', message="Bernstein Vazirani algorithm executed correctly", circuit=pathImgNew)
 
     elif switch == 3:
-        num_qubits = request.args.get('num_qubits', type=int)
-        bynary_string = request.args.get('bynary_string', type=str)
+        num_qubits = request.form.get('num_qubits', type=int)
+        bynary_string = request.form.get('bynary_string', type=str)
         S_circuit = s_algorithm(bynary_string, num_qubits)
-        S_circuit.draw()
-        S_circuit.qasm(formatted=True, filename="AlgoritmoSimons.qasm")
         # Getting the current date and time
         dt = datetime.now()
+        cir = S_circuit.draw(output='mpl')
+        pathImg = './static/AlgoritmoSimons_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        S_circuit.qasm(formatted=True, filename="AlgoritmoSimons.qasm")
+
         with open("AlgoritmoSimons.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -101,11 +128,13 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("AlgoritmoSimons.qasm")
-        return "Algoritmo Simons OK"
+        pathImgNew = pathImg.replace("./static/", "")
+        return render_template('result.html', message="Simons algorithm executed correctly",
+                               circuit=pathImgNew)
 
     elif switch == 4:
-        n_count = request.args.get('num_qubits', type=int)
-        a = request.args.get('num', type=int)
+        n_count = request.form.get('num_qubits', type=int)
+        a = request.form.get('num', type=int)
         # Create QuantumCircuit with n_count counting qubits
         # plus 4 qubits for U to act on
         qc = QuantumCircuit(n_count + 4, n_count)
@@ -123,10 +152,14 @@ def quantumAPI():
         qc.append(qft_dagger(n_count), range(n_count))
         # Measure circuit
         qc.measure(range(n_count), range(n_count))
-        qc.draw(fold=-1)  # -1 means 'do not fold'
-        qc.qasm(formatted=True, filename="AlgoritmoShor's.qasm")
         # Getting the current date and time
         dt = datetime.now()
+
+        cir = qc.draw(fold=-1, output='mpl') # -1 means 'do not fold'
+        pathImg = './static/AlgoritmoShors_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        qc.qasm(formatted=True, filename="AlgoritmoShor's.qasm")
+
         with open("AlgoritmoShor's.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -138,15 +171,20 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("AlgoritmoShor's.qasm")
-        return "Algoritmo Shor's OK"
+        pathImgNew = pathImg.replace("./static/", "")
+        return render_template('result.html', message="Shor's algorithm executed correctly",
+                               circuit=pathImgNew)
 
-    elif switch == 4:
-        num_qubits = request.args.get('num_qubits', type=int)
+    elif switch == 5:
+        num_qubits = request.form.get('num_qubits', type=int)
         circuit = gr_algorithm(num_qubits)
-        circuit.draw()
-        circuit.qasm(formatted=True, filename="AlgoritmoGrover's.qasm")
         # Getting the current date and time
         dt = datetime.now()
+        cir = circuit.draw(output='mpl')
+        pathImg = './static/AlgoritmoGrovers_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        circuit.qasm(formatted=True, filename="AlgoritmoGrover's.qasm")
+
         with open("AlgoritmoGrover's.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -157,15 +195,20 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("AlgoritmoGrover's.qasm")
-        return "Algoritmo Grover's OK"
+        pathImgNew = pathImg.replace("./static/", "")
+        return render_template('result.html', message="Grover's algorithm executed correctly",
+                               circuit=pathImgNew)
 
-    elif switch == 5:
-        num_qubits = request.args.get('num_qubits', type=int)
+    elif switch == 6:
+        num_qubits = request.form.get('num_qubits', type=int)
         circuit = ws_algorithm(num_qubits)
-        circuit.draw()
-        circuit.qasm(formatted=True, filename="AlgoritmoWalkSerachHypercube.qasm")
         # Getting the current date and time
         dt = datetime.now()
+        cir = circuit.draw(output='mpl')
+        pathImg = './static/AlgoritmoWalkSerachHypercube_' + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.png'
+        cir.savefig(pathImg)
+        circuit.qasm(formatted=True, filename="AlgoritmoWalkSerachHypercube.qasm")
+
         with open("AlgoritmoWalkSerachHypercube.qasm", "rb") as f:
             encoded = Binary(f.read())
 
@@ -176,10 +219,13 @@ def quantumAPI():
             "file": encoded,
         })
         os.remove("AlgoritmoWalkSerachHypercube.qasm")
-        return "Algoritmo Walk Serach Hypercube OK"
+        pathImgNew = pathImg.replace("./static/", "")
+        return render_template('result.html', message="Walk Serach Hypercube algorithm executed correctly",
+                               circuit=pathImgNew)
 
     else:
-        return "Nessun Algoritmo trovato"
+        return render_template('result.html', message="Error!",
+                               circuit="error.png")
 
 
 @app.route('/getAlgorithmFilebyName', methods=['GET', 'POST'])
@@ -193,79 +239,29 @@ def getAlgorithmFile():
 
 @app.route('/insertAlgorithm', methods=['GET', 'POST'])
 def insertAlgorithm():
-    algoritmo = request.args.get('algoritmo', type=str)
-    a = algoritmo.qasm(formatted=True, filename="Algoritmo_personal.qasm")
-    print(a)
-    return "Inserimento Algoritmo effettuato con successo!"
+    name = request.form.get('name_selected', type=str)
+    algoritmo = request.form.get('algorithm', type=str)
+    # Getting the current date and time
+    dt = datetime.now()
+    pathName = "Algoritmo_personal_" + dt.strftime("%m-%d-%Y_%H:%M:%S") + '.txt'
+    text_file = open(pathName, "w")
+    n = text_file.write(algoritmo)
+    text_file.close()
 
-@app.route('/deutschJozsa', methods=['POST'])
-def algorithmsJozsa():
-    log_size = request.args.get('log_size', type=int)
-    case = request.args.get('case', type=str)
-    oracle_gate = dj_oracle(case, log_size)
-    dj_circuit = dj_algorithm(oracle_gate, log_size)
-    print(dj_circuit.draw())
+    with open(pathName, "rb") as f:
+        encoded = Binary(f.read())
 
-    return "Algoritmo Deutsch Jozsa OK"
+    mycol.insert_one({
+        "nome": name,
+        "data": dt,
+        "file": encoded,
+    })
 
-@app.route('/bernsteinVazirani', methods=['POST'])
-def algorithmsVazirani():
-    num_qubits = request.args.get('num_qubits', type=int)
-    bynary_string = request.args.get('bynary_string', type=str)
-    bV_circuit = bv_algorithm(num_qubits, bynary_string)
-    print(bV_circuit.draw())
+    os.remove(pathName)
 
-    return "Algoritmo Bernstein Vazirani OK"
+    return render_template('result.html', message="Algorithm upload successfully!",
+                           circuit="Success.png", page="insert")
 
-@app.route('/simons', methods=['POST'])
-def algorithmSimons():
-    num_qubits = request.args.get('num_qubits', type=int)
-    bynary_string = request.args.get('bynary_string', type=str)
-    S_circuit = s_algorithm(bynary_string, num_qubits)
-    print(S_circuit.draw())
-
-    return "Algoritmo Simons OK"
-
-@app.route('/shors', methods=['POST'])
-def algorithmShors():
-    n_count = request.args.get('num_qubits', type=int)
-    a = request.args.get('num', type=int)
-    # Create QuantumCircuit with n_count counting qubits
-    # plus 4 qubits for U to act on
-    qc = QuantumCircuit(n_count + 4, n_count)
-    # Initialize counting qubits
-    # in state |+>
-    for q in range(n_count):
-        qc.h(q)
-    # And auxiliary register in state |1>
-    qc.x(3 + n_count)
-    # Do controlled-U operations
-    for q in range(n_count):
-        qc.append(c_amod15(a, 2 ** q),
-                  [q] + [i + n_count for i in range(4)])
-    # Do inverse-QFT
-    qc.append(qft_dagger(n_count), range(n_count))
-    # Measure circuit
-    qc.measure(range(n_count), range(n_count))
-    print(qc.draw(fold=-1))  # -1 means 'do not fold'
-
-    return "Algoritmo Shor's OK"
-
-@app.route('/grovers', methods=['POST'])
-def algorithmGrovers():
-    num_qubits = request.args.get('num_qubits', type=int)
-    circuit = gr_algorithm(num_qubits)
-    print(circuit.draw())
-
-    return "Algoritmo Grover's OK"
-
-@app.route('/walkSearchHypercube', methods=['POST'])
-def algorithmWalkSearch():
-    num_qubits = request.args.get('num_qubits', type=int)
-    circuit = ws_algorithm(num_qubits)
-    print(circuit.draw())
-
-    return "Algoritmo Walk Serach Hypercube OK"
 
 @app.route('/checkBusyDevice', methods=['POST'])
 def checkDevice():
