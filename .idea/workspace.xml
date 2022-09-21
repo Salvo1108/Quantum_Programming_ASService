@@ -2,39 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50cb23dd-69cb-44ed-a7dd-2751678b03a0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gateway/static/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/static/style_.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/choiseAlgorithms.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/insertAlgorithms.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/result.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/images/iphone-mockup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/_normalize.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/abstracts/_functions.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/abstracts/_include-media.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/abstracts/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/abstracts/_variables.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/base/_base.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/base/_helpers.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/base/_typography.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/components/_buttons.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/components/_forms.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_features.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_footer.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_header.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_hero.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_media.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/layout/_newsletter.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/src/scss/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/templates/welcomePage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/algorithms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/provider.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/static/Success.png" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/static/Success.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/templates/choiseAlgorithms.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/choiseAlgorithms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/templates/insertAlgorithms.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/insertAlgorithms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,12 +42,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/gateway/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gateway/templates" />
       <recent name="$PROJECT_DIR$/gateway/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gateway" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,6 +103,23 @@
       <workItem from="1659077691596" duration="9000" />
       <workItem from="1659077835739" duration="6731000" />
       <workItem from="1659130662607" duration="6857000" />
+      <workItem from="1660231292140" duration="853000" />
+      <workItem from="1660655423130" duration="1026000" />
+      <workItem from="1660833983106" duration="185000" />
+      <workItem from="1660902499532" duration="1142000" />
+      <workItem from="1660924867741" duration="340000" />
+      <workItem from="1660990170351" duration="1225000" />
+      <workItem from="1660993665863" duration="398000" />
+      <workItem from="1661092509793" duration="14000" />
+      <workItem from="1661095314588" duration="30000" />
+      <workItem from="1661096252096" duration="528000" />
+      <workItem from="1661104161920" duration="12000" />
+      <workItem from="1661159079148" duration="2226000" />
+      <workItem from="1661162137468" duration="561000" />
+      <workItem from="1661163320714" duration="1694000" />
+      <workItem from="1663586650759" duration="4485000" />
+      <workItem from="1663619986386" duration="15977000" />
+      <workItem from="1663755018462" duration="2570000" />
     </task>
     <servers />
   </component>
@@ -129,6 +138,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1659177986606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
+    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1663757901650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
   </component>
 </project>

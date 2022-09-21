@@ -53,14 +53,18 @@
                                    <div class="label label-default" id="labelSelectalgorithm">
                                       <label>Select the algorithm you want to use:</label>
                                       <select id="type_selected" name="type_selected" class="selectpicker form-control" onchange="showDiv(this)">
-                                          <option value=0>...</option>
-                                          <option value=1>Deutsch Jozsa</option>
-                                          <option value=2>Bernstein Vazirani</option>
-                                          <option value=3>Simons</option>
-                                          <option value=4>Shors</option>
-                                          <option value=5>Grovers</option>
-                                          <option value=6>Walk Search</option>
+                                          <option value="Nessuno">...</option>
+                                          <option value="DeutschJozsa">Deutsch Jozsa</option>
+                                          <option value="BernsteinVazirani">Bernstein Vazirani</option>
+                                          <option value="Simons">Simons</option>
+                                          <option value="Shors">Shors</option>
+                                          <option value="Grovers">Grovers</option>
+                                          <option value="WalkSerachHypercube">Walk Search</option>
                                       </select>
+                                   </div>
+                                    <div class="label label-default" id="labelNumQubitsMaschine" style="display:none;">
+                                      <label>Enter the number of qubits the machine must have for execution:</label>
+                                       <input type="text" id="NumQubitsMaschine" name="NumQubitsMaschine" placeholder="Enter Num Qubits Maschine">
                                    </div>
                                    <div class="label label-default" id="labelTypealgorithm" style="display:none;">
                                       <nobr><label>Enter what type of oracle(balanced,constant) you want to use:</label></nobr>
@@ -202,39 +206,45 @@
 </html>
 <script type="text/javascript">
 function showDiv(select){
-   if(select.value==1){
+   if(select.value=="DeutschJozsa"){
        document.getElementById('labelTypealgorithm').style.display = "block";
        document.getElementById('labelLogsize').style.display = "block";
        document.getElementById('labelNumqubits').style.display = "none";
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelNum').style.display = "none";
-   } else if(select.value==2){
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
+   } else if(select.value=="BernsteinVazirani"){
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelBynarystring').style.display = "block";
-   }else if(select.value==3){
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
+   }else if(select.value=="Simons"){
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelBynarystring').style.display = "block";
-   }else if(select.value==4){
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
+   }else if(select.value=="Shors"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelNum').style.display = "block";
-   }else if(select.value==5){
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
+   }else if(select.value=="Grovers"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNum').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
-   }else if(select.value==6){
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
+   }else if(select.value=="WalkSerachHypercube"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNum').style.display = "none";
+       document.getElementById('labelNumQubitsMaschine').style.display = "block";
        document.getElementById('labelNumqubits').style.display = "block";
    }else {
     document.getElementById('labelTypealgorithm').style.display = "none";
@@ -242,6 +252,7 @@ function showDiv(select){
     document.getElementById('labelNumqubits').style.display = "none";
     document.getElementById('labelBynarystring').style.display = "none";
     document.getElementById('labelNum').style.display = "none";
+    document.getElementById('labelNumQubitsMaschine').style.display = "none";
    }
 }
 </script>
