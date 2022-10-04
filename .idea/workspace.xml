@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50cb23dd-69cb-44ed-a7dd-2751678b03a0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gateway/algorithms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/provider.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/algorithms.py" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/algorithms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/static/Success.png" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/static/Success.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/templates/choiseAlgorithms.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/choiseAlgorithms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/templates/insertAlgorithms.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/insertAlgorithms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +17,17 @@
       <list>
         <option value="Python Script" />
       </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
     </option>
   </component>
   <component name="Git.Settings">
@@ -42,7 +47,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File" value="GitIgnore" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -53,7 +60,7 @@
       <recent name="$PROJECT_DIR$/gateway" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.application">
     <configuration name="application" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Quantum_Programming_ASService" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -76,9 +83,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="example" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Quantum_Programming_ASService" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../example.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.application" />
+        <item itemvalue="Python.example" />
       </list>
     </recent_temporary>
   </component>
@@ -119,7 +149,16 @@
       <workItem from="1661163320714" duration="1694000" />
       <workItem from="1663586650759" duration="4485000" />
       <workItem from="1663619986386" duration="15977000" />
-      <workItem from="1663755018462" duration="2570000" />
+      <workItem from="1663755018462" duration="2622000" />
+      <workItem from="1663772080536" duration="22000" />
+      <workItem from="1663774767198" duration="5000" />
+      <workItem from="1663860543943" duration="2872000" />
+      <workItem from="1664373623737" duration="1216000" />
+      <workItem from="1664376552281" duration="1062000" />
+      <workItem from="1664524522359" duration="2022000" />
+      <workItem from="1664885756899" duration="2603000" />
+      <workItem from="1664889949597" duration="2410000" />
+      <workItem from="1664902221190" duration="1108000" />
     </task>
     <servers />
   </component>
@@ -138,6 +177,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1663757901650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
+    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$example.coverage" NAME="example Coverage Results" MODIFIED="1663861811933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+    <SUITE FILE_PATH="coverage/Quantum_Programming_ASService$application.coverage" NAME="application Coverage Results" MODIFIED="1664891684080" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gateway" />
   </component>
 </project>

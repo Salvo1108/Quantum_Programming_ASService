@@ -19,11 +19,25 @@ import os
 from qiskit.providers.ibmq import least_busy
 
 
-class AlgorithmsStrategy:
+class AlgorithmsStrategy(ABC):
 
-    def DeutschJozsa(self, log_size: int, case_selected: str, num_qbit: int, db, provider):
-        log_size = request.form.get('log_size', type=int)
-        case = request.form.get('case_selected', type=str)
+    @abstractmethod
+    def execution(self, dict_value, num_qbit: int, db, provider):
+        """method that deals with the execution of the algorithm"""
+        pass
+
+    @staticmethod
+    def insert(self, dict_value, db):
+        """method that deals with the insertion of the algorithm"""
+        pass
+
+
+class DeutschJozsa(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
+        print(num_qbit)
+        log_size = dict_value['log_size']
+        case = dict_value['case_selected']
 
         # Getting the current date and time
 
@@ -61,8 +75,14 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def BernsteinVazirani(self, num_qubits: int, bynary_string: str, num_qbit: int, db, provider):
+
+class BernsteinVazirani(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
         # Getting the current date and time
+
+        num_qubits = dict_value["num_qubits"]
+        bynary_string = dict_value["bynary_string"]
 
         dt = datetime.now()
         bV_circuit = bv_algorithm(num_qubits, bynary_string)
@@ -97,8 +117,14 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def Simons(self, num_qubits: int, bynary_string: str, num_qbit: int, db, provider):
+
+class Simons(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
         # Getting the current date and time
+
+        num_qubits = dict_value["num_qubits"]
+        bynary_string = dict_value["bynary_string"]
 
         S_circuit = s_algorithm(bynary_string, num_qubits)
 
@@ -135,7 +161,14 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def Shors(self, n_count: int, a: int, num_qbit: int, db, provider):
+
+class Shors(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
+
+        n_count = dict_value["n_count"]
+        a = dict_value["a"]
+
         # Create QuantumCircuit with n_count counting qubits
         # plus 4 qubits for U to act on
 
@@ -198,7 +231,11 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def Grovers(self, num_qubits: int, num_qbit: int, db, provider):
+
+class Grovers(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
+        num_qubits = dict_value["num_qubits"]
         circuit = gr_algorithm(num_qubits)
 
         """verifica disponibilità macchina quantistica"""
@@ -233,7 +270,11 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def WalkSerachHypercube(self, num_qubits: int, num_qbit: int, db, provider):
+
+class WalkSerachHypercube(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
+        num_qubits = dict_value["num_qubits"]
         circuit = ws_algorithm(num_qubits)
 
         """verifica disponibilità macchina quantistica"""
@@ -268,12 +309,13 @@ class AlgorithmsStrategy:
 
         return pathImgNew
 
-    def PersonalAlgorithms(self, algo: str, num_qbit: int, db, provider):
+
+class PersonalAlgorithms(AlgorithmsStrategy):
+
+    def execution(self, dict_value, num_qbit: int, db, provider):
 
         """nome dell'algoritmo preso dalla richiesta"""
-        algo = request.form.get('name_algorithm', type=str)
-        """numero qbit preso dalla richiesta necessario per verificare quale macchina quantistica è più libera"""
-        num_qbit = request.form.get('num_qbit', type=int)
+        algo = dict_value["algo"]
 
         """check sul db se è presente l'algoritmo richiesto"""
         result = db.find({'nome': algo})
@@ -295,7 +337,11 @@ class AlgorithmsStrategy:
 
         return 'Algoritmo non presente!', 400
 
-    def insert(self, name: str, algoritmo: str, descrizione: str, db):
+    def insert(self, dict_value, db):
+
+        name = dict_value["name"]
+        algoritmo = dict_value["algoritmo"]
+        descrizione = dict_value["descrizione"]
         # Getting the current date and time
         dt = datetime.now()
 

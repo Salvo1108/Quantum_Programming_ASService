@@ -21,7 +21,6 @@ import os
 app = Flask(__name__)
 db = Database.connect()
 qiskit = Qiskit()
-algoritmo = AlgorithmsStrategy()
 
 
 @app.route('/', methods=['GET'])
@@ -52,57 +51,76 @@ def back():
 
 @app.route('/APIquantum', methods=['POST'])
 def personaQuantumAPI():
-    """nome dell'algoritmo preso dalla richiesta"""
-    algo = request.form.get('name_algorithm', type=str)
+    value_form = {
+        "algo": request.form.get('name_algorithm', type=str),
+    }
     """numero qbit preso dalla richiesta necessario per verificare quale macchina quantistica è più libera"""
     num_qbit = request.form.get('num_qbit', type=int)
 
-    algoritmopersonal = AlgorithmsStrategy.PersonalAlgorithms(algoritmo,algo, num_qbit, db, qiskit)
+    strategia = PersonalAlgorithms()
+    algoritmopersonal = PersonalAlgorithms.execution(strategia, value_form, num_qbit, db, qiskit)
 
     return algoritmopersonal
+
 
 @app.route('/quantumAPI', methods=['POST'])
 def quantumAPI():
     switch = request.form.get('type_selected', type=str)
-    log_size = request.form.get('log_size', type=int)
-    case = request.form.get('case_selected', type=str)
     num_qbitMaschine = request.form.get('NumQubitsMaschine', type=int)
-    num_qubits = request.form.get('num_qubits', type=int)
-    bynary_string = request.form.get('bynary_string', type=str)
-    n_count = request.form.get('num_qubits', type=int)
-    a = request.form.get('num', type=int)
+    value_form = {
+        "log_size": request.form.get('log_size', type=int),
+        "case_selected": request.form.get('case_selected', type=str),
+        "num_qubits": request.form.get('num_qubits', type=int),
+        "bynary_string": request.form.get('bynary_string', type=str),
+        "n_count": request.form.get('num_qubits', type=int),
+        "a": request.form.get('num', type=int)
+    }
+    # switch = request.form.get('type_selected', type=str)
+    # log_size = request.form.get('log_size', type=int)
+    # case = request.form.get('case_selected', type=str)
+    # num_qbitMaschine = request.form.get(',NumQubitsMaschine', type=int)
+    # num_qubits = request.form.get('num_qubits', type=int)
+    # bynary_string = request.form.get('bynary_string', type=str)
+    # n_count = request.form.get('num_qubits', type=int)
+    # a = request.form.get('num', type=int)
 
     if switch == 'DeutschJozsa':
 
-        deutJozsa = AlgorithmsStrategy.DeutschJozsa(algoritmo, log_size, case, num_qbitMaschine, db, qiskit)
+        strategia = DeutschJozsa()
+        deutJozsa = DeutschJozsa.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
         return render_template('result.html', message='Deutsch Jozsa algorithm executed correctly', circuit=deutJozsa,
                                page='execution')
 
     elif switch == 'BernsteinVazirani':
 
-        bernVazirani = AlgorithmsStrategy.BernsteinVazirani(algoritmo, num_qubits, bynary_string, num_qbitMaschine, db, qiskit)
+        strategia = BernsteinVazirani()
+        bernVazirani = BernsteinVazirani.execution(strategia, value_form, num_qbitMaschine, db,
+                                                   qiskit)
 
         return render_template('result.html',
                                message='Bernstein Vazirani algorithm executed correctly'
                                , circuit=bernVazirani, page='execution')
     elif switch == 'Simons':
 
-        simons = AlgorithmsStrategy.Simons(algoritmo, num_qubits, bynary_string, num_qbitMaschine, db, qiskit)
+        strategia = Simons()
+        simons = Simons.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
         return render_template('result.html',
                                message='Simons algorithm executed correctly'
                                , circuit=simons, page='execution')
     elif switch == 'Shors':
 
-        shors = AlgorithmsStrategy.Shors(algoritmo, n_count, a, num_qbitMaschine, db, qiskit)
+        strategia = Shors()
+        shors = Shors.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
         return render_template('result.html',
                                message="Shor's algorithm executed correctly"
                                , circuit=shors, page='execution')
     elif switch == 'Grovers':
 
-        grovers = AlgorithmsStrategy.Grovers(algoritmo, num_qubits, num_qbitMaschine, db, qiskit)
+        strategia = Grovers()
+        grovers = Grovers.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
         return render_template('result.html',
                                message="Grover's algorithm executed correctly"
@@ -110,7 +128,8 @@ def quantumAPI():
 
     elif switch == 'WalkSerachHypercube':
 
-        walkHyper = AlgorithmsStrategy.WalkSerachHypercube(algoritmo, num_qubits, num_qbitMaschine, db, qiskit)
+        strategia = WalkSerachHypercube()
+        walkHyper = WalkSerachHypercube.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
         return render_template('result.html',
                                message='Walk Serach Hypercube algorithm executed correctly'
@@ -123,11 +142,17 @@ def quantumAPI():
 
 @app.route('/insertAlgorithm', methods=['GET', 'POST'])
 def insertAlgorithm():
-    name = request.form.get('name_selected', type=str)
-    algoritmo = request.form.get('algorithm', type=str)
-    descrizione = request.form.get('description', type=str)
+    value_form = {
+        "name": request.form.get('name_selected', type=str),
+        "algoritmo": request.form.get('algorithm', type=str),
+        "descrizione": request.form.get('description', type=str)
+    }
+    #name = request.form.get('name_selected', type=str)
+    #algoritmo = request.form.get('algorithm', type=str)
+    #descrizione = request.form.get('description', type=str)
 
-    insert = AlgorithmsStrategy.insert(algoritmo, name, algoritmo, descrizione, db)
+    strategia = PersonalAlgorithms()
+    insert = PersonalAlgorithms.insert(strategia, value_form, db)
 
     return render_template('result.html',
                            message='Algorithm upload successfully!',
