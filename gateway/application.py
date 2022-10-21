@@ -49,13 +49,15 @@ def back():
     return redirect(url_for('index'))
 
 
-@app.route('/APIquantum', methods=['POST'])
+@app.route('/CustomAPIquantum', methods=['POST'])
 def personaQuantumAPI():
+    # Numero di qubits della macchina reale per l'esecuzione dell'algoritmo
+    num_qbit = request.form.get('num_qbit', type=int),
+    # Costruzione dizionario con i valori inseriti dall'utente
     value_form = {
         "algo": request.form.get('name_algorithm', type=str),
+        "input": request.form.get('input_algorithm')
     }
-    """numero qbit preso dalla richiesta necessario per verificare quale macchina quantistica è più libera"""
-    num_qbit = request.form.get('num_qbit', type=int)
 
     strategia = PersonalAlgorithms()
     algoritmopersonal = PersonalAlgorithms.execution(strategia, value_form, num_qbit, db, qiskit)
@@ -65,8 +67,11 @@ def personaQuantumAPI():
 
 @app.route('/quantumAPI', methods=['POST'])
 def quantumAPI():
+    # Nome dell'algoritmo
     switch = request.form.get('type_selected', type=str)
+    # Numero di qubits della macchina reale per l'esecuzione dell'algoritmo
     num_qbitMaschine = request.form.get('NumQubitsMaschine', type=int)
+    # Costruzione dizionario con i valori inseriti dall'utente
     value_form = {
         "log_size": request.form.get('log_size', type=int),
         "case_selected": request.form.get('case_selected', type=str),
@@ -75,88 +80,110 @@ def quantumAPI():
         "n_count": request.form.get('num_qubits', type=int),
         "a": request.form.get('num', type=int)
     }
-    # switch = request.form.get('type_selected', type=str)
-    # log_size = request.form.get('log_size', type=int)
-    # case = request.form.get('case_selected', type=str)
-    # num_qbitMaschine = request.form.get(',NumQubitsMaschine', type=int)
-    # num_qubits = request.form.get('num_qubits', type=int)
-    # bynary_string = request.form.get('bynary_string', type=str)
-    # n_count = request.form.get('num_qubits', type=int)
-    # a = request.form.get('num', type=int)
 
     if switch == 'DeutschJozsa':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = DeutschJozsa()
         deutJozsa = DeutschJozsa.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html', message='Deutsch Jozsa algorithm executed correctly', circuit=deutJozsa,
                                page='execution')
 
     elif switch == 'BernsteinVazirani':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = BernsteinVazirani()
         bernVazirani = BernsteinVazirani.execution(strategia, value_form, num_qbitMaschine, db,
                                                    qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html',
                                message='Bernstein Vazirani algorithm executed correctly'
                                , circuit=bernVazirani, page='execution')
     elif switch == 'Simons':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = Simons()
         simons = Simons.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html',
                                message='Simons algorithm executed correctly'
                                , circuit=simons, page='execution')
     elif switch == 'Shors':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = Shors()
         shors = Shors.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html',
                                message="Shor's algorithm executed correctly"
                                , circuit=shors, page='execution')
     elif switch == 'Grovers':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = Grovers()
         grovers = Grovers.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html',
                                message="Grover's algorithm executed correctly"
                                , circuit=grovers, page='execution')
 
     elif switch == 'WalkSerachHypercube':
 
+        # Esecuzione algoritmo tramite la sua classe specifica
         strategia = WalkSerachHypercube()
         walkHyper = WalkSerachHypercube.execution(strategia, value_form, num_qbitMaschine, db, qiskit)
 
+        # Renderizzazione pagina result.html per esito operazione
         return render_template('result.html',
                                message='Walk Serach Hypercube algorithm executed correctly'
                                , circuit=walkHyper, page='execution')
     else:
 
+        # In caso di errore renderizzazione pagina result.html per esito operazione
         return render_template('result.html', message='Error!',
                                circuit='error.png', page='execution')
 
 
 @app.route('/insertAlgorithm', methods=['GET', 'POST'])
 def insertAlgorithm():
+
+    #Costruzione dizionario con i valori inseriti dall'utente
     value_form = {
         "name": request.form.get('name_selected', type=str),
         "algoritmo": request.form.get('algorithm', type=str),
         "descrizione": request.form.get('description', type=str)
     }
-    #name = request.form.get('name_selected', type=str)
-    #algoritmo = request.form.get('algorithm', type=str)
-    #descrizione = request.form.get('description', type=str)
 
+    # Inserimento algoritmo tramite metodo specifico
     strategia = PersonalAlgorithms()
     insert = PersonalAlgorithms.insert(strategia, value_form, db)
 
+    # Renderizzazione pagina result.html per esito operazione
     return render_template('result.html',
                            message='Algorithm upload successfully!',
                            circuit='Success.png', page='insert')
+
+
+@app.route('/getInfoAlgorithm', methods=['GET', 'POST'])
+def InfoAlgorithm():
+
+    #Costruzione dizionario con i valori inseriti dall'utente
+    value_form = {
+        "name": request.form.get('name_selected', type=str),
+        "data": request.form.get('date_algorithm', type=str),
+    }
+
+    # Info algoritmo tramite metodo specifico
+    strategia = PersonalAlgorithms()
+    info = PersonalAlgorithms.getInfo(strategia, value_form, db)
+
+    return info, 200
 
 
 if __name__ == '__main__':

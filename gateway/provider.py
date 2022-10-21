@@ -19,8 +19,11 @@ class Qiskit(ProviderStrategy):
         IBMQ.save_account(
             '3bcafaa7577ea475b89cd6cead08d8db9eb1122f2f873c0d31e1704e1c0fb51503881220945b3443ed4ce738996b5ea2f6281cd39bedd0936f02c7400aa71ccf'
             , overwrite=True)
+        #Viene caricato l'account attualmente in uso sul dispositivo
         IBMQ.load_account()
+        #Selezine del provider
         provider = IBMQ.get_provider(hub='ibm-q')
+        #Controllo quale backend è più libero per il numero di qubit indicati
         backend = least_busy(provider.backends(filters=lambda x: \
             x.configuration().n_qubits >= num_qbit + 1 \
             and not x.configuration().simulator \

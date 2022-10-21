@@ -16,6 +16,7 @@ from bson.binary import Binary
 from qiskit import *
 from qiskit.tools.visualization import plot_histogram
 import os
+import numpy
 from qiskit.providers.ibmq import least_busy
 
 
@@ -316,6 +317,12 @@ class PersonalAlgorithms(AlgorithmsStrategy):
 
         """nome dell'algoritmo preso dalla richiesta"""
         algo = dict_value["algo"]
+        """input dell'algoritmo preso dalla richiesta"""
+        valoriInput = np.array(dict_value["input"])
+
+        matrice = valoriInput[1]
+        count = valoriInput[2]
+
 
         """check sul db se è presente l'algoritmo richiesto"""
         result = db.find({'nome': algo})
@@ -325,6 +332,9 @@ class PersonalAlgorithms(AlgorithmsStrategy):
                 stringa_algo = x['algoritmo']
                 """conversione stringa algoritmo salvata precedentemente in circuito"""
                 new_circuito = QuantumCircuit.from_qasm_str(stringa_algo)
+                """inserimento valori di inputi nel circuito"""
+                new_circuito(matrice,count)
+                """rappresentazione grafica circuito"""
                 new_circuito.draw()
                 """verifica disponibilità macchina quantistica"""
                 macchina_free = provider.connect(num_qbit)

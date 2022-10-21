@@ -62,6 +62,34 @@
                                           <option value="WalkSerachHypercube">Walk Search</option>
                                       </select>
                                    </div>
+                                    <div class="label label-default" id="labelDescrizioneDeutschJozsa" style="display:none;">
+                                      <label>In the Deutsch-Jozsa problem, a black box is given, called an oracle
+                                          which implements a certain function.
+                                          The function takes n-digit binary values and produces as output either 0 or 1 for each of these values.
+                                          The function is called constant (the output is always 0 or always 1) or balanced (it gives 1 for half of the inputs and 0 for the other half).
+                                          The task is then to determine whether f is constant or balanced. )</label>
+                                   </div>
+                                     <div class="label label-default" id="labelDescrizioneBernsteinVazirani" style="display:none;">
+                                      <label>It is a special case of the Deutsch-Jozsa algorithm where instead of distinguishing
+                                          two different classes of functions, it seeks to know a string encoded in a function.
+                                          The Bernstein-Vazirani algorithm was designed to demonstrate a separation
+                                          of oracles between the BQP and BPP complexity classes.</label>
+                                   </div>
+                                     <div class="label label-default" id="labelDescrizioneSimons" style="display:none;">
+                                      <label>  Simon's problem incorporates the use of a black box (black box). This problem gives an oracle separation between the complexity classes BPP and BQP,
+                                          unlike the separation given by the Deutsch-Jozsa algorithm, which separates P and EQP</label>
+                                   </div>
+                                     <div class="label label-default" id="labelDescrizioneShors" style="display:none;">
+                                      <label>Shor's factorization algorithm is an algorithm devised by Peter Shor in 1994 to solve the problem of factoring integers into prime numbers.</label>
+                                   </div>
+                                     <div class="label label-default" id="labelDescrizioneGrovers" style="display:none;">
+                                      <label>The Grover search algorithm is an algorithm devised by Lov Grover in 1996 at Bell Labs to solve a search problem in an undifferentiated
+                                          database of N elements in O(N1/2) time using O(log N) as the storage space.</label>
+                                   </div>
+                                    <div class="label label-default" id="labelDescrizioneWalkSerachHypercube" style="display:none;">
+                                      <label>Quantum walks are the quantum equivalence of a classical Markov chain and have become key in many quantum algorithms.</label>
+                                   </div>
+                                    &nbsp
                                     <div class="label label-default" id="labelNumQubitsMaschine" style="display:none;">
                                       <label>Enter the number of qubits the machine must have for execution:</label>
                                        <input type="text" id="NumQubitsMaschine" name="NumQubitsMaschine" placeholder="Enter Num Qubits Maschine">
@@ -213,18 +241,36 @@ function showDiv(select){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelNum').style.display = "none";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "block";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+       document.getElementById('labelDescrizioneSimons').style.display = "none";
+       document.getElementById('labelDescrizioneShors').style.display = "none";
+       document.getElementById('labelDescrizioneGrovers').style.display = "none";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    } else if(select.value=="BernsteinVazirani"){
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelBynarystring').style.display = "block";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "block";
+       document.getElementById('labelDescrizioneSimons').style.display = "none";
+       document.getElementById('labelDescrizioneShors').style.display = "none";
+       document.getElementById('labelDescrizioneGrovers').style.display = "none";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    }else if(select.value=="Simons"){
        document.getElementById('labelTypealgorithm').style.display = "none";
        document.getElementById('labelLogsize').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelBynarystring').style.display = "block";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+       document.getElementById('labelDescrizioneSimons').style.display = "block";
+       document.getElementById('labelDescrizioneShors').style.display = "none";
+       document.getElementById('labelDescrizioneGrovers').style.display = "none";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    }else if(select.value=="Shors"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
@@ -232,6 +278,12 @@ function showDiv(select){
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelNum').style.display = "block";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+       document.getElementById('labelDescrizioneSimons').style.display = "none";
+       document.getElementById('labelDescrizioneShors').style.display = "block";
+       document.getElementById('labelDescrizioneGrovers').style.display = "none";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    }else if(select.value=="Grovers"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
@@ -239,6 +291,12 @@ function showDiv(select){
        document.getElementById('labelNum').style.display = "none";
        document.getElementById('labelNumqubits').style.display = "block";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+       document.getElementById('labelDescrizioneSimons').style.display = "none";
+       document.getElementById('labelDescrizioneShors').style.display = "none";
+       document.getElementById('labelDescrizioneGrovers').style.display = "block";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    }else if(select.value=="WalkSerachHypercube"){
        document.getElementById('labelBynarystring').style.display = "none";
        document.getElementById('labelTypealgorithm').style.display = "none";
@@ -246,6 +304,12 @@ function showDiv(select){
        document.getElementById('labelNum').style.display = "none";
        document.getElementById('labelNumQubitsMaschine').style.display = "block";
        document.getElementById('labelNumqubits').style.display = "block";
+       document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+       document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+       document.getElementById('labelDescrizioneSimons').style.display = "none";
+       document.getElementById('labelDescrizioneShors').style.display = "none";
+       document.getElementById('labelDescrizioneGrovers').style.display = "none";
+       document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "block";
    }else {
     document.getElementById('labelTypealgorithm').style.display = "none";
     document.getElementById('labelLogsize').style.display = "none";
@@ -253,6 +317,12 @@ function showDiv(select){
     document.getElementById('labelBynarystring').style.display = "none";
     document.getElementById('labelNum').style.display = "none";
     document.getElementById('labelNumQubitsMaschine').style.display = "none";
+    document.getElementById('labelDescrizioneDeutschJozsa').style.display = "none";
+    document.getElementById('labelDescrizioneBernsteinVazirani').style.display = "none";
+    document.getElementById('labelDescrizioneSimons').style.display = "none";
+    document.getElementById('labelDescrizioneShors').style.display = "none";
+    document.getElementById('labelDescrizioneGrovers').style.display = "none";
+    document.getElementById('labelDescrizioneWalkSerachHypercube').style.display = "none";
    }
 }
 </script>
